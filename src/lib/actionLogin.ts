@@ -12,6 +12,24 @@ function extractOptionalNumber(title: string) {
   return null;
 }
 
+export interface state {
+  message: string;
+  myName: string;
+  myNontriID: string;
+  maxNormalPercent: number;
+  maxOptionalPercent: number;
+  myNormalPercent: number;
+  myOptionalExceed: number;
+  myOptionalPercent: number;
+  myleftOverScore: number;
+  myScoreToDoLeft: number;
+  totalscore: number;
+  myCurrentScore: number;
+  countNormal: number;
+  mySumScoreNormal: number;
+  fullScoreCount: number;
+}
+
 export async function login(prevState: any, formData: any) {
   try {
     const username = formData.get("username") as string;

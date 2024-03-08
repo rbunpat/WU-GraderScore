@@ -23,6 +23,25 @@ function SubmitButton() {
   );
 }
 
+//type 
+export interface state {
+  message: string;
+  myName: string;
+  myNontriID: string;
+  maxNormalPercent: number;
+  maxOptionalPercent: number;
+  myNormalPercent: number;
+  myOptionalExceed: number;
+  myOptionalPercent: number;
+  myleftOverScore: number;
+  myScoreToDoLeft: number;
+  totalscore: number;
+  myCurrentScore: number;
+  countNormal: number;
+  mySumScoreNormal: number;
+  fullScoreCount: number;
+}
+
 export default function LoginPage() {
   const refreshPage = () => {
     window.location.reload();
@@ -176,9 +195,9 @@ export default function LoginPage() {
                       <p className="font-normal">
                         {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
                         <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
-                          {state.myCurrentScore}
+                          {(state as { myCurrentScore: number, totalscore: number }).myCurrentScore}
                         </p>
-                        /{state.totalscore}
+                        /{(state as { myCurrentScore: number, totalscore: number }).totalscore}
                       </p>
                     </div>
                     <div className="pt-4 text-xl font-bold">
@@ -186,9 +205,9 @@ export default function LoginPage() {
                       <p className="font-normal">
                         {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
                         <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
-                          {state.submittedCount}
+                          {(state as { mySumScoreNormal: number }).mySumScoreNormal}
                         </p>
-                        /{state.countNormal}
+                        /{(state as { countNormal: number }).countNormal}
                         &nbsp;ข้อ
                       </p>
                     </div>
@@ -197,9 +216,9 @@ export default function LoginPage() {
                       <p className="font-normal">
                         {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
                         <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
-                          {state.fullScoreCount}
+                          {(state as { fullScoreCount: number }).fullScoreCount}
                         </p>
-                        /{state.countNormal}
+                        /{(state as { countNormal: number }).countNormal}
                         &nbsp;ข้อ
                       </p>
                     </div>
