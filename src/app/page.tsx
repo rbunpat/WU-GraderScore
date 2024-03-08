@@ -205,7 +205,7 @@ export default function LoginPage() {
                       <p className="font-normal">
                         {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
                         <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
-                          {(state as { mySumScoreNormal: number }).mySumScoreNormal}
+                          {(state as { submittedCount: number }).submittedCount}
                         </p>
                         /{(state as { countNormal: number }).countNormal}
                         &nbsp;ข้อ
