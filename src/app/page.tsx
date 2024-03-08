@@ -165,7 +165,7 @@ export default function LoginPage() {
           <div className="flex flex-col min-h-screen  bg-gray-100 ">
             <header className="flex items-center justify-between px-6 py-4 bg-gray-200 dark:bg-[#333]">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                POSN-2566 Grader Score
+                WOI-Grader Score
               </h1>
               <Link href={"/"}>
                 <Button
