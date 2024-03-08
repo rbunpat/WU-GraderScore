@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "WOI-Grader score",
-  description: "because im too lazy to count the score myself",
+  description: "cuz you're too lazy to count the score yourself",
   metadataBase: new URL("https://graderscore.vercel.app/"),
 };
 
