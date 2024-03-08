@@ -39,6 +39,10 @@ export default function LoginPage() {
     myOptionalPercent: 0,
     myleftOverScore: 0,
     myScoreToDoLeft: 0,
+    totalscore: 0,
+    myCurrentScore: 0,
+    countNormal: 0,
+    mySumScoreNormal: 0,
   };
 
   const [state, formAction] = useFormState(login, initState);
@@ -68,23 +72,23 @@ export default function LoginPage() {
           <div className="animate-fade-up animate-ease-out flex flex-col items-center justify-center p-4 min-h-screen bg-gray-100 dark:bg-gray-800">
             <div className="mx-auto max-w-sm space-y-6">
               <div className=" space-y-2 text-center">
-                <h1 className="text-3xl font-bold">Probsolve-Score</h1>
+                <h1 className="text-3xl font-bold">WOI-Grader Score</h1>
                 <p className="text-gray-500 dark:text-gray-400">
-                  คะแนนเก็บ Probsolve 60% + 10% (optional) ตอนนี้คุณมีเท่าไร?
+                  คะแนนเก็บใน Grader ตอนนี้คุณมีเท่าไร?
                   เราจะช่วยนับคะแนนให้เอง
                 </p>
               </div>
               <div className="space-y-4">
                 <form action={formAction}>
                   <div className="space-y-2">
-                    <Label htmlFor="username">Nontri Account</Label>
-                    <Input name="username" placeholder="b651050xxxx" required />
+                    <Label htmlFor="username">posnwu.xyz Account</Label>
+                    <Input name="username" placeholder="wucom23_xx" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
                     <Input
                       name="password"
-                      placeholder="password ตามที่อาจารย์ให้ในห้อง"
+                      placeholder="password ตามที่อาจารย์ให้"
                       required
                       type="password"
                     />
@@ -98,7 +102,7 @@ export default function LoginPage() {
                 </form>
                 <Link
                   className="inline-block w-full text-center text-sm underline"
-                  href="https://www.instagram.com/faithpanupong"
+                  href="https://www.instagram.com/rbunpat"
                 >
                   เจอบัคหรอ? แจ้งมาเลย 🥹
                 </Link>
@@ -112,22 +116,27 @@ export default function LoginPage() {
             </div>
           </div>
           <div className="text-xs font-normal p-4  text-gray-400 max-w-sm mx-auto w-full absolute bottom-20  left-0 right-0">
-            *คะแนนอาจคลาดเคลื่อนเล็กน้อยเนื่องจากอาจมีข้อที่ปิดไป
-            แนะนำให้ทำคะแนนให้ได้เกินกว่าเป้าหมายนะคับ
+            *จำนวนข้อที่ทำแล้วอาจคลาดเคลื่อนเล็กน้อยเนื่องจากอาจมีข้อที่ส่งไปแล้วแต่ยังไม่ได้คะแนน
           </div>
           <div className=" w-full">
             <footer className="w-full p-4  text-center bg-gray-200 dark:bg-gray-700 absolute bottom-0">
               <p className="text-gray-600 dark:text-gray-300">
-                {`ไม่มีการเก็บข้อมูลคับดูโค้ดได้ที่ `}
+                {`We don't collect any of your data cuz we're lazy`}
+                {/* <Link
+                  className="text-blue-500 underline"
+                  href="https://github.com/rbunpat/my-probsolve-score"
+                >
+                  GitHub
+                </Link> */}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {`Thanks for the original code, inzpirezuza!`}
                 <Link
                   className="text-blue-500 underline"
                   href="https://github.com/inspirezuza/my-probsolve-score"
                 >
                   GitHub
                 </Link>
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {`"เพราะเราก็ขี้เกียจนับคะแนนเองเหมือนกัน😔"`}
               </p>
             </footer>
           </div>
@@ -137,7 +146,7 @@ export default function LoginPage() {
           <div className="flex flex-col min-h-screen  bg-gray-100 ">
             <header className="flex items-center justify-between px-6 py-4 bg-gray-200 dark:bg-[#333]">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                My Problem Solve
+                POSN-2566 Grader Score
               </h1>
               <Link href={"/"}>
                 <Button
@@ -163,17 +172,39 @@ export default function LoginPage() {
                       <Chart data={chartData} />
                     </div>
                     <div className="pt-4 text-xl font-bold">
-                      Homework Score:{" "}
+                      Grader Score:{" "}
                       <p className="font-normal">
-                        {Math.round(state.myNormalPercent * 10) / 10} +
+                        {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
                         <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
-                          {Math.round(state.myOptionalExceed * 10) / 10}
+                          {state.myCurrentScore}
                         </p>
-                        /{state.maxNormalPercent}
+                        /{state.totalscore}
+                      </p>
+                    </div>
+                    <div className="pt-4 text-xl font-bold">
+                      ทำไปแล้ว:{" "}
+                      <p className="font-normal">
+                        {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
+                          {state.submittedCount}
+                        </p>
+                        /{state.countNormal}
+                        &nbsp;ข้อ
+                      </p>
+                    </div>
+                    <div className="pt-4 text-xl font-bold">
+                      ได้คะแนนเต็ม:{" "}
+                      <p className="font-normal">
+                        {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
+                          {state.fullScoreCount}
+                        </p>
+                        /{state.countNormal}
+                        &nbsp;ข้อ
                       </p>
                     </div>
                     <div className="">
-                      <div className="text-transparent text-xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+                      <div className="text-transparent text-xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 hidden">
                         <div className="font-extrabold ">Optional Score: </div>
                         <p className="font-normal">
                           {Math.round(state.myOptionalPercent * 10) / 10}/
@@ -208,16 +239,17 @@ export default function LoginPage() {
 
             <footer className="w-full p-4  text-center bg-gray-200 dark:bg-gray-700 bottom-0">
               <p className="text-gray-600 dark:text-gray-300">
-                {`ไม่มีการเก็บข้อมูลคับดูโค้ดได้ที่ `}
+                {`We don't collect any of your data cuz we're lazy`}
+
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {`Thanks for the original code, inzpirezuza!  `}
                 <Link
                   className="text-blue-500 underline"
                   href="https://github.com/inspirezuza/my-probsolve-score"
                 >
                   GitHub
                 </Link>
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {`"เพราะเราก็ขี้เกียจนับคะแนนเองเหมือนกัน😔"`}
               </p>
             </footer>
           </div>
