@@ -18,7 +18,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <Button className="w-full" type="submit" disabled={pending}>
-      {pending ? "..." : "Login"}
+      {pending ? "Loading..." : "Login"}
     </Button>
   );
 }
@@ -122,6 +122,7 @@ export default function LoginPage() {
                 <Link
                   className="inline-block w-full text-center text-sm underline"
                   href="https://www.instagram.com/rbunpat"
+                  target="_blank"
                 >
                   เจอบัคหรอ? แจ้งมาเลย 🥹
                 </Link>
@@ -224,7 +225,7 @@ export default function LoginPage() {
                     </div>
                     <div className="">
                       <div className="text-transparent text-xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 hidden">
-                        <div className="font-extrabold ">Optional Score: </div>
+                        <div className="font-extrabold hidden ">Optional Score: </div>
                         <p className="font-normal">
                           {Math.round(state.myOptionalPercent * 10) / 10}/
                           {state.maxOptionalPercent}
