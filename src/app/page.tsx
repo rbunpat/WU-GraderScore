@@ -175,7 +175,7 @@ export default function LoginPage() {
                       <br />
                       ID: {state.myNontriID}
                       <br />
-                      <p>อัพเดตล่าสุด : {state.dataUpdateTime}</p>
+                      <p>อัพเดตล่าสุด : {(state as { dataUpdateTime: string }).dataUpdateTime}</p>
                     </p>
                     <div className="p-4">
                       <Chart data={chartData} />
