@@ -1,7 +1,7 @@
 "use server";
 
 import * as cheerio from "cheerio";
-process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 function extractOptionalNumber(title: string) {
   const regex = /ptional\D*(\d+)/i;
@@ -34,10 +34,15 @@ export async function login(prevState: any, formData: any) {
   try {
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
-    const response = await fetch("https://posnwu.xyz/", {credentials: "include"});
+
+    const response = await fetch("https://posnwu.xyz/", {
+      credentials: "include",
+    });
+
     if (!response.ok) {
       throw new Error("Failed to fetch");
     }
+
     const html = await response.text();
 
     // Extract authenticity token from the HTML response
@@ -45,66 +50,57 @@ export async function login(prevState: any, formData: any) {
     const match = html.match(authenticityTokenRegex);
 
     const sessionIdHeader = response.headers.get("Set-Cookie");
+
     let sessionIdValue: string | undefined;
     let authenticityToken: string | undefined;
+
     if (sessionIdHeader) {
       const sessionIdRegex = /_session_id=([^;]+)/;
       const sessionIdMatch = sessionIdHeader.match(sessionIdRegex);
+
       if (sessionIdMatch && match) {
         sessionIdValue = sessionIdMatch[1];
         authenticityToken = match[1];
-        // console.log(authenticityToken, sessionIdValue);
       }
     }
 
-    console.log(authenticityToken, sessionIdValue);
     const loginFormData = new URLSearchParams();
+
     loginFormData.append("utf8", "✓");
     loginFormData.append("authenticity_token", authenticityToken as string);
     loginFormData.append("login", username);
     loginFormData.append("password", password);
     loginFormData.append("commit", "Login");
 
-    const loginResponse = await fetch(
-      "https://posnwu.xyz/login/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Cookie: `_session_id=${sessionIdValue}`, // Attach session cookie to request headers
-        },
-        body: loginFormData,
-        credentials: "include",
-      }
-    );
+    const loginResponse = await fetch("https://posnwu.xyz/login/login", {
+      method: "POST",
+      body: loginFormData,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Cookie: `_session_id=${sessionIdValue}`, // Attach session cookie to request headers
+      },
+      credentials: "include",
+    });
 
     if (!loginResponse.ok) {
       throw new Error("Failed to log in");
     }
 
-    const mainResponse = await fetch(
-      "https://posnwu.xyz/main/list",
-      {
-        method: "GET",
-        headers: {
-          // "Content-Type": "application/x-www-form-urlencoded",
-          Cookie: `_session_id=${sessionIdValue}`, // Attach session cookie to request headers
-        },
-        // body: loginFormData,
-        credentials: "include",
-      }
-    );
+    const mainResponse = await fetch("https://posnwu.xyz/main/list", {
+      method: "GET",
+      headers: {
+        Cookie: `_session_id=${sessionIdValue}`,
+      },
+      credentials: "include",
+    });
 
-    // Step 3: Process the login response
     const htmlContent = await mainResponse.text();
-    // console.log(htmlContent);
+
     if (htmlContent.includes("<b>Welcome to grader</b>")) {
-      console.log("wtf");
       throw new Error(
         "Login Failed, please check your username and password again"
       );
     } else {
-      // Continue with your logic if the expected content is found
       console.log("Expected content found");
     }
 
@@ -126,7 +122,6 @@ export async function login(prevState: any, formData: any) {
 
     $("tbody tr").each((index, element) => {
       if (index == 0) {
-        // console.log($(element).find("td:nth-child(1)").text().trim());
         const thaiRegex = /[\u0E00-\u0E7F]+/g;
         const matches = $(element)
           .find("td:nth-child(1)")
@@ -152,24 +147,11 @@ export async function login(prevState: any, formData: any) {
         }
       }
 
-      // const examProblem = [
-      //   "บ้านไกลเรือนเคียง",
-      //   "เรือที่ไม่มีวันกลับ",
-      //   "ม้ากระโดด",
-      // ];
-      // for (const problem of examProblem) {
-      //   if (title.includes(problem)) {
-      //     title += " - optional - 1pt";
-      //     break;
-      //   }
-      // }
-
       const optionalPoint = extractOptionalNumber(title);
       if (optionalPoint != null && optionalPoint > 0) {
         countOptional += optionalPoint;
         mySumScoreOptional += parseInt(score) * optionalPoint;
       } else {
-        // sumScoreNormal += 1;
         countNormal += 1;
         mySumScoreNormal += parseInt(score);
         if (parseInt(score) == 100) {
@@ -178,12 +160,11 @@ export async function login(prevState: any, formData: any) {
         } else if (parseInt(score) > 0) {
           submittedCount += 1;
         }
-        // console.log("normal", title, score, mySumScoreNormal, countNormal);
       }
       results.push({ title, score });
     });
 
-    console.log(mySumScoreNormal)
+    console.log(mySumScoreNormal);
 
     const maxNormalPercent = 100;
     const maxOptionalPercent = 0;
@@ -223,8 +204,9 @@ export async function login(prevState: any, formData: any) {
       mySumScoreNormal -
       mySumScoreOptional;
 
-    const totalscore = ((maxNormalPercent + maxOptionalPercent) / scoreRatio) * 100;
-    console.log('totalscore')
+    const totalscore =
+      ((maxNormalPercent + maxOptionalPercent) / scoreRatio) * 100;
+    console.log("totalscore");
 
     const myCurrentScore = mySumScoreNormal + mySumScoreOptional;
 
@@ -236,11 +218,10 @@ export async function login(prevState: any, formData: any) {
       countNormal,
       submittedCount,
       fullScoreCount,
-      totalscore,//corret
+      totalscore, //corret
       myCurrentScore,
       mySumScoreNormal,
       myScoreToDoLeft // correct
-  
     );
     const realOptionalPercent = myOptionalPercent > 10 ? 10 : myOptionalPercent;
     const leftOverPercent =
@@ -252,14 +233,6 @@ export async function login(prevState: any, formData: any) {
     const leftOverNormalScore = countNormal * 100 - mySumScoreNormal;
     const leftOverOptionalScore =
       (maxOptionalPercent * 100) / scoreRatio - mySumScoreOptional;
-
-    // console.log(
-    //   countNormal,
-    //   countOptional,
-    //   mySumScoreNormal,
-    //   mySumScoreOptional,
-    //   scoreRatio
-    // );
 
     const result = {
       message: "Success",
@@ -283,7 +256,7 @@ export async function login(prevState: any, formData: any) {
     return result;
   } catch (error: any) {
     console.log(error.message);
-    console.log(error)
+    console.log(error);
     return {
       message: error.message,
       myName: "",
