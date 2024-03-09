@@ -25,10 +25,7 @@ export interface state {
   myName: string;
   myNontriID: string;
   maxNormalPercent: number;
-  maxOptionalPercent: number;
   myNormalPercent: number;
-  myOptionalExceed: number;
-  myOptionalPercent: number;
   myleftOverScore: number;
   myScoreToDoLeft: number;
   totalscore: number;
@@ -36,6 +33,7 @@ export interface state {
   countNormal: number;
   mySumScoreNormal: number;
   fullScoreCount: number;
+  dataUpdateTime: string;
 }
 
 export default function LoginPage() {
@@ -48,31 +46,20 @@ export default function LoginPage() {
     myName: "",
     myNontriID: "",
     maxNormalPercent: 0,
-    maxOptionalPercent: 0,
     myNormalPercent: 0,
-    myOptionalExceed: 0,
-    myOptionalPercent: 0,
     myleftOverScore: 0,
     myScoreToDoLeft: 0,
     totalscore: 0,
     myCurrentScore: 0,
     countNormal: 0,
     mySumScoreNormal: 0,
+    dataUpdateTime: "",
   };
 
   const [state, formAction] = useFormState(login, initState);
 
   const chartData = [
     { name: "A", value: state.myNormalPercent, color: "#756AB6" },
-    { name: "B", value: state.myOptionalExceed, color: "#AC87C5" },
-    {
-      name: "C",
-      value:
-        state.myOptionalPercent >= state.maxOptionalPercent
-          ? state.maxOptionalPercent
-          : state.myOptionalPercent,
-      color: "#E0AED0",
-    },
     {
       name: "D",
       value: state.myleftOverScore,
@@ -164,6 +151,8 @@ export default function LoginPage() {
               <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 WOI-Grader Score
               </h1>
+
+              
               <Link href={"/"}>
                 <Button
                   onClick={refreshPage}
@@ -182,7 +171,11 @@ export default function LoginPage() {
                   <div className="space-y-2 text-center">
                     <h1 className="pt-8 text-3xl font-bold">Your Score</h1>
                     <p className="text-gray-500 dark:text-gray-400">
+                      Name: {state.myName}
+                      <br />
                       ID: {state.myNontriID}
+                      <br />
+                      <p>อัพเดตล่าสุด : {state.dataUpdateTime}</p>
                     </p>
                     <div className="p-4">
                       <Chart data={chartData} />
@@ -190,7 +183,6 @@ export default function LoginPage() {
                     <div className="pt-4 text-xl font-bold">
                       Grader Score:{" "}
                       <p className="font-normal">
-                        {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
                         <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
                           {(state as { myCurrentScore: number, totalscore: number }).myCurrentScore}
                         </p>
@@ -200,7 +192,6 @@ export default function LoginPage() {
                     <div className="pt-4 text-xl font-bold">
                       ทำไปแล้ว:{" "}
                       <p className="font-normal">
-                        {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
                         <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
                           {(state as { submittedCount: number }).submittedCount}
                         </p>
@@ -211,7 +202,6 @@ export default function LoginPage() {
                     <div className="pt-4 text-xl font-bold">
                       ได้คะแนนเต็ม:{" "}
                       <p className="font-normal">
-                        {/* {Math.round(state.myNormalPercent * 10) / 10} + */}
                         <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
                           {(state as { fullScoreCount: number }).fullScoreCount}
                         </p>
@@ -220,33 +210,11 @@ export default function LoginPage() {
                       </p>
                     </div>
                     <div className="">
-                      <div className="text-transparent text-xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 hidden">
-                        <div className="font-extrabold hidden ">Optional Score: </div>
-                        <p className="font-normal">
-                          {Math.round(state.myOptionalPercent * 10) / 10}/
-                          {state.maxOptionalPercent}
-                        </p>
-                      </div>
-                      {state.myleftOverScore <= 0 ? (
-                        <div>
-                          <p className="text-sm font-normal ">
-                            คะแนนของคุณเกินมา {-state.myScoreToDoLeft} คะแนน!
-                          </p>
-                          <p className="text-transparent  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-md font-normal">
-                            เก่งมาก {state.myName}!
-                          </p>
-
-                          <div className="flex justify-center items-center p-4">
-                            <RainbowJittat />
-                          </div>
-                        </div>
-                      ) : (
                         <div>
                           <p className=" text-sm font-normal text-gray-500 dark:text-gray-400">
                             คุณต้องทำอีก {state.myScoreToDoLeft} คะแนน สู้ๆ!
                           </p>
                         </div>
-                      )}
                     </div>
                   </div>
                 </div>

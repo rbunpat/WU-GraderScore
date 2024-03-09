@@ -117,18 +117,28 @@ export async function login(prevState: any, formData: any) {
     let countOptional = 0;
     let myName = "";
 
+    let dataUpdateTime = "";
+
     let submittedCount = 0;
     let fullScoreCount = 0;
 
     $("tbody tr").each((index, element) => {
       if (index == 0) {
-        const thaiRegex = /[\u0E00-\u0E7F]+/g;
+        // const thaiRegex = /[\u0E00-\u0E7F]+/g;
         const matches = $(element)
           .find("td:nth-child(1)")
           .text()
           .trim()
-          .match(thaiRegex);
-        myName = matches && matches.length > 0 ? matches[0] : "";
+          // .match(thaiRegex);
+        // myName = matches && matches.length > 0 ? matches[0] : "";
+        myName = matches
+
+        dataUpdateTime = myName.split("\n")[1];
+        dataUpdateTime = dataUpdateTime.split(" ")[3];
+
+        myName = myName.split("\n")[0];
+        myName = myName.split(".")[0] + " " + myName.split(".")[1];
+
         return;
       }
       let title = $(element).find("td:nth-child(2)").text().trim();
@@ -239,10 +249,7 @@ export async function login(prevState: any, formData: any) {
       myName,
       myNontriID: username,
       maxNormalPercent,
-      maxOptionalPercent,
       myNormalPercent,
-      myOptionalExceed,
-      myOptionalPercent,
       myleftOverScore,
       submittedCount,
       fullScoreCount,
@@ -251,6 +258,7 @@ export async function login(prevState: any, formData: any) {
       countNormal,
       mySumScoreNormal,
       myScoreToDoLeft,
+      dataUpdateTime,
     };
     console.log(result);
     return result;
@@ -262,10 +270,7 @@ export async function login(prevState: any, formData: any) {
       myName: "",
       myNontriID: "",
       maxNormalPercent: 0,
-      maxOptionalPercent: 0,
       myNormalPercent: 0,
-      myOptionalExceed: 0,
-      myOptionalPercent: 0,
       myleftOverScore: 0,
       myScoreToDoLeft: 0,
     };
