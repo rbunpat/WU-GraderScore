@@ -59,11 +59,11 @@ export default function LoginPage() {
   const [state, formAction] = useFormState(login, initState);
 
   const chartData = [
-    { name: "A", value: state.myNormalPercent, color: "#756AB6" },
+    { name: "A", value: state.myNormalPercent, color: "#2CA6A4" },
     {
       name: "D",
       value: state.myleftOverScore,
-      color: "#FFE5E5",
+      color: "#9DD9D2",
     },
   ];
 
@@ -183,7 +183,7 @@ export default function LoginPage() {
                     <div className="pt-4 text-xl font-bold">
                       Grader Score:{" "}
                       <p className="font-normal">
-                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-600 inline-block">
                           {(state as { myCurrentScore: number, totalscore: number }).myCurrentScore}
                         </p>
                         /{(state as { myCurrentScore: number, totalscore: number }).totalscore}
@@ -192,7 +192,7 @@ export default function LoginPage() {
                     <div className="pt-4 text-xl font-bold">
                       ทำไปแล้ว:{" "}
                       <p className="font-normal">
-                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-600 inline-block">
                           {(state as { submittedCount: number }).submittedCount}
                         </p>
                         /{(state as { countNormal: number }).countNormal}
@@ -202,7 +202,7 @@ export default function LoginPage() {
                     <div className="pt-4 text-xl font-bold">
                       ได้คะแนนเต็ม:{" "}
                       <p className="font-normal">
-                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-block">
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-600 inline-block">
                           {(state as { fullScoreCount: number }).fullScoreCount}
                         </p>
                         /{(state as { countNormal: number }).countNormal}
