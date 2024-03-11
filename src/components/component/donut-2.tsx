@@ -18,7 +18,8 @@ const Chart: React.FC<ChartProps> = ({ data }) => {
     .slice(0, -1)
     .reduce((a, b) => a + b.value, 0);
     total_value_except_last = Math.round(total_value_except_last * 10) / 10;
-    total_value_except_last = total_value_except_last.toFixed(2);
+    total_value_except_last = parseFloat(total_value_except_last.toFixed(2));
+    
     
   // Calculate start and end degrees for each data item
   let startDegree = 0;
