@@ -17,7 +17,7 @@ const Chart: React.FC<ChartProps> = ({ data }) => {
   let total_value_except_last = data
     .slice(0, -1)
     .reduce((a, b) => a + b.value, 0);
-    total_value_except_last = (total_value_except_last * 10) / 10;\
+    total_value_except_last = (total_value_except_last * 10) / 10;
     //@ts-ignore
     total_value_except_last = total_value_except_last.toFixed(2);
     
