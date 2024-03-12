@@ -183,7 +183,7 @@ export default function LoginPage() {
                     <div className="pt-4 text-xl font-bold">
                       Grader Score:{" "}
                       <p className="font-normal">
-                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-600 inline-block">
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-cyan-600 inline-block">
                           {(state as { myCurrentScore: number, totalscore: number }).myCurrentScore}
                         </p>
                         /{(state as { myCurrentScore: number, totalscore: number }).totalscore}
@@ -192,7 +192,7 @@ export default function LoginPage() {
                     <div className="pt-4 text-xl font-bold">
                       ทำไปแล้ว:{" "}
                       <p className="font-normal">
-                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-600 inline-block">
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-cyan-600 inline-block">
                           {(state as { submittedCount: number }).submittedCount}
                         </p>
                         /{(state as { countNormal: number }).countNormal}
@@ -202,7 +202,7 @@ export default function LoginPage() {
                     <div className="pt-4 text-xl font-bold">
                       ได้คะแนนเต็ม:{" "}
                       <p className="font-normal">
-                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-600 inline-block">
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-cyan-600 inline-block">
                           {(state as { fullScoreCount: number }).fullScoreCount}
                         </p>
                         /{(state as { countNormal: number }).countNormal}
