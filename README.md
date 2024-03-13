@@ -1,13 +1,13 @@
-# My Problem Solving Score
+# WU-GraderScore
 
 ## Introduction
 
-Welcome to **My Problem Solving Score**! This is a web application designed to assist students in tracking their scores in 01204214 Kasetsart University problem-solving subjects . With regular updates, students can conveniently monitor their progress and performance in these subjects.
+Welcome to **WU-GraderScore**! This is a web application designed to assist students in tracking their scores in 01204214 Kasetsart University problem-solving subjects . With regular updates, students can conveniently monitor their progress and performance in these subjects.
 
-https://my-probsolve-score.vercel.app/
+https://graderscore.vercel.app/
 
 ## Grader Problem Solving
-https://solve.secondtrain.org/
+https://posnwu.xyz/
 
 ## Features
 
@@ -18,7 +18,7 @@ https://solve.secondtrain.org/
 
 ## How to Use
 
-**Login**: ใช้ Nontri account + password สำหรับเข้า login https://solve.secondtrain.org/ 
+**Login**: ใช้ posnwu.xyz account + password สำหรับเข้า login https://posnwu.xyz/
 
 
 ## Technologies Used
