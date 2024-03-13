@@ -6,7 +6,7 @@
 
 https://graderscore.vercel.app/
 
-## Grader Problem Solving
+## Grader URL
 https://posnwu.xyz/
 
 
