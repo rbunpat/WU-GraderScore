@@ -24,8 +24,14 @@ https://posnwu.xyz/
 ## Technologies Used
 
 - **Frontend**:
-  - Next js only because i love u
-  - หมดแล้ว มีแค่ Frontend เพียวๆ เพราะไม่มีการเก็บข้อมูลใดๆ จ้า
+  - Next.js
+  - Yeah thats it lol
+
+## Screenshots
+
+![App Screenshot](https://cdn.discordapp.com/attachments/900631639288324109/1201937133921636413/image.png?ex=65cba22f&is=65b92d2f&hm=51fa238844edb1d72d313de786af6379aeb192cfa48adae3ed79567b01954176&)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/900631639288324109/1201937321709273179/image.png?ex=65cba25c&is=65b92d5c&hm=ef5e6acbeefea49ccd11efa1e252ce76b1507872a381193cc93ed8356940da96&)
 
 ## Installation
 
