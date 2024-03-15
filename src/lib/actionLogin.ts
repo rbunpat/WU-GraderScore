@@ -209,14 +209,18 @@ export async function login(prevState: any, formData: any) {
     }
 
     // For text output
-    const myScoreToDoLeft =
+    let myScoreToDoLeft =
       ((maxNormalPercent + maxOptionalPercent) / scoreRatio) * 100 -
       mySumScoreNormal -
       mySumScoreOptional;
 
-    const totalscore =
+    myScoreToDoLeft = Math.round(myScoreToDoLeft * 1000) / 1000;
+
+    let totalscore =
       ((maxNormalPercent + maxOptionalPercent) / scoreRatio) * 100;
     console.log("totalscore");
+
+    totalscore = Math.round(totalscore * 1000) / 1000;
 
     const myCurrentScore = mySumScoreNormal + mySumScoreOptional;
 

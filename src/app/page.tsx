@@ -8,7 +8,7 @@ import Link from "next/link";
 import { login } from "@/lib/actionLogin";
 import { useFormState, useFormStatus } from "react-dom";
 import Chart from "@/components/component/donut-2";
-import RainbowJittat from "@/components/component/rainbow-jittat";
+import RainbowJittat from "@/components/component/rainbow-kimslick";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -216,6 +216,12 @@ export default function LoginPage() {
                           </p>
                         </div>
                     </div>
+
+                    {state.myNormalPercent > 20 ? (
+                      <RainbowJittat />
+                    ) : (
+                      <div></div>
+                    )}
                   </div>
                 </div>
               </div>
