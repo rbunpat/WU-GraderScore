@@ -12,7 +12,7 @@ export default function RainbowJittat() {
         </span>
         <div className=" relative bg-cover h-auto w-fit">
           <Image
-            src="//static.rachatat.com/kimslick.png"
+            src="/kimslick.png"
             width={200}
             height={200}
             alt="Handsome KimSlick"
