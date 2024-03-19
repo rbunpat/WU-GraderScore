@@ -9,12 +9,39 @@ import { login } from "@/lib/actionLogin";
 import { useFormState, useFormStatus } from "react-dom";
 import Chart from "@/components/component/donut-2";
 import RainbowJittat from "@/components/component/rainbow-kimslick";
+import { log } from "console";
 
 function SubmitButton() {
+  //get username and password from form
+
   const { pending } = useFormStatus();
   return (
     <Button className="w-full" type="submit" disabled={pending}>
       {pending ? "Loading..." : "Login"}
+    </Button>
+  );
+}
+
+function RefreshButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button                   className="text-gray-900 dark:text-gray-100"
+    variant="outline" type="submit" disabled={pending}>
+      {pending ? "Loading..." : "Refresh"}
+    </Button>
+  );
+}
+
+function LogoutButton() {
+  localStorage.removeItem("username");
+  localStorage.removeItem("password");
+
+  const logoutpending = false;
+
+  return (
+    <Button className="text-gray-900 dark:text-gray-100 ml-5"
+    variant="outline" type="submit" disabled={logoutpending}>
+      {logoutpending ? "Loading..." : "Logout"}
     </Button>
   );
 }
@@ -34,10 +61,14 @@ export interface state {
   mySumScoreNormal: number;
   fullScoreCount: number;
   dataUpdateTime: string;
+  username: string;
+  password: string;
 }
 
 export default function LoginPage() {
   const refreshPage = () => {
+    
+
     window.location.reload();
   };
 
@@ -54,6 +85,8 @@ export default function LoginPage() {
     countNormal: 0,
     mySumScoreNormal: 0,
     dataUpdateTime: "",
+    username: "",
+    password: "",
   };
 
   const [state, formAction] = useFormState(login, initState);
@@ -70,6 +103,11 @@ export default function LoginPage() {
   return (
     <>
       {state.message != "Success" ? (
+        //if username and password is not found in localstorage
+        //show login form
+        //else show score
+
+
         <div className=" overflow-hidden relative">
           <div className="animate-fade-up animate-ease-out flex flex-col items-center justify-center p-4 min-h-screen bg-gray-100 dark:bg-gray-800">
             <div className="mx-auto max-w-sm space-y-6">
@@ -152,16 +190,45 @@ export default function LoginPage() {
                 WOI-Grader Score
               </h1>
 
+              <form action={formAction}>
+                  <div className="space-y-2 hidden">
+                    <Label htmlFor="username">posnwu.xyz Account</Label>
+                    
+                    <Input 
+                    name="username"
+                    placeholder="wucom23_xx"
+                    //@ts-ignore
+                    value={state.username}
+                    required />
+                  </div>
+                  <div className="space-y-2 hidden">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      name="password"
+                      placeholder="password ตามที่อาจารย์ให้"
+                      required
+                      type="password"
+                      //@ts-ignore
+                      value={state.password}
+                    />
+                  </div>
+                  <div className="pt-4">
+                    <RefreshButton />
+
+
               
-              <Link href={"/"}>
+              {/* <Link href={"/"}>
                 <Button
-                  onClick={refreshPage}
-                  className="text-gray-900 dark:text-gray-100"
+                  onClick={logoutButton}
+                  className="text-gray-900 dark:text-gray-100 ml-5"
                   variant="outline"
                 >
                   Logout
                 </Button>
-              </Link>
+              </Link> */}
+              <LogoutButton />
+              </div>
+                </form>
             </header>
             <div className="animate-fade-up animate-ease-out flex-1 overflow-y-auto">
               {" "}

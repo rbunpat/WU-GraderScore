@@ -263,6 +263,8 @@ export async function login(prevState: any, formData: any) {
       mySumScoreNormal,
       myScoreToDoLeft,
       dataUpdateTime,
+      username,
+      password,
     };
     console.log(result);
     return result;
