@@ -33,8 +33,6 @@ function RefreshButton() {
 }
 
 function LogoutButton() {
-  localStorage.removeItem("username");
-  localStorage.removeItem("password");
 
   const logoutpending = false;
 
