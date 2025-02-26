@@ -120,7 +120,7 @@ export default function LoginPage() {
                 <form action={formAction}>
                   <div className="space-y-2">
                     <Label htmlFor="username">posnwu.xyz Account</Label>
-                    <Input name="username" placeholder="wucom23_xx" required />
+                    <Input name="username" placeholder="wucom24_xx" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
@@ -194,7 +194,7 @@ export default function LoginPage() {
                     
                     <Input 
                     name="username"
-                    placeholder="wucom23_xx"
+                    placeholder="wucom24_xx"
                     //@ts-ignore
                     value={state.username}
                     required />
