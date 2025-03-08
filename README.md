@@ -2,7 +2,7 @@
 
 ## Introduction
 
-เอาไว้ดูคะแนนใน Grader ของสอวน.คอม ม. วลัยลักษณ์ ค่าย 2 แค่นั้นแหละ 555555555  
+เอาไว้ดูคะแนนใน Grader ของสอวน.คอม ม.วลัยลักษณ์ ค่าย 2 แค่นั้นแหละ 555555555  
 
 https://graderscore.vercel.app/
 
@@ -20,6 +20,8 @@ https://posnwu.xyz/
 - **Frontend**:
   - Next.js
   - Yeah thats it lol
+- **Analytics**:
+  - Vercel Analytics
 
 ## Screenshots
 
